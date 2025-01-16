@@ -25,6 +25,13 @@ public class ForegroundService extends Service {
         startPluginForegroundService(bundle);
     }
 
+    override
+    public void onDestroy() {
+        super.onDestroy()
+        Context context = getApplicationContext();
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.deleteNotificationChannel("foreground.service.channel");
+    }
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         return START_STICKY;

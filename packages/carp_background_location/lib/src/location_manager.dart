@@ -15,7 +15,8 @@ class LocationManager {
           "Background location is on to keep the app up-to-date with your location.",
       _notificationBigMsg =
           "Background location is on to keep the app up-to-date with your location. "
-          "This is required for main features to work properly when the app is not running.";
+          "This is required for main features to work properly when the app is not running.",
+      _notificationIcon = "";
 
   int _interval = 5;
   double _distanceFilter = 0;
@@ -29,7 +30,7 @@ class LocationManager {
   LocationManager._() {
     // Check if the port is already used
     if (IsolateNameServer.lookupPortByName(
-            LocationServiceRepository.isolateName) !=
+        LocationServiceRepository.isolateName) !=
         null) {
       IsolateNameServer.removePortNameMapping(
           LocationServiceRepository.isolateName);
@@ -89,6 +90,7 @@ class LocationManager {
               notificationTitle: _notificationTitle,
               notificationMsg: _notificationMsg,
               notificationBigMsg: _notificationBigMsg,
+              notificationIcon: _notificationIcon,
             )),
         iosSettings: IOSSettings(
           accuracy: _accuracy,
@@ -114,6 +116,10 @@ class LocationManager {
   /// Set the long message of the notification for the background service.
   /// Android only.
   set notificationBigMsg(String message) => _notificationBigMsg = message;
+
+  /// Set the icon of the notification for the background service.
+  /// Android only.
+  set notificationIcon(String icon) => _notificationIcon = icon;
 
   /// Set the update interval in seconds.
   /// Android only.
